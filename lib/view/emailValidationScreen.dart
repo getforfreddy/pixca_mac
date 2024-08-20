@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pixca/view/homeScreen.dart';
 import 'package:pixca/view/login.dart';
@@ -27,20 +28,20 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
           width: Get.width,
           height: Get.height,
           child: Column(children: [
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
-            const Center(
+             Center(
               child: Text(
                 'Verify your email address',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18.h,
                   // color: AppConstant.yellowText,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             Center(
               child: Container(
@@ -54,25 +55,25 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: 10.h,
                     ),
                     Text(
                       'Name: ${widget.user.displayName}',
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style:  TextStyle(
+                        fontSize: 14.sp,
                         fontFamily: 'Roboto-Regular',
                         fontWeight: FontWeight.w400,
                         // color: AppConstant.appTextColor,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                     SizedBox(
+                      height: 5.h,
                     ),
                     Text(
                       'Email: ${widget.user.email}',
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style:  TextStyle(
+                        fontSize: 14.sp,
                         fontFamily: 'Roboto-Regular',
                         // color: AppConstant.appTextColor,
                       ),
@@ -81,32 +82,32 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: 30.h,
             ),
             widget.user.emailVerified
-                ? const Center(
+                ?  Center(
               child: Text(
                 'Email is verified',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontFamily: 'Roboto-Regular',
                   color: Colors.lightGreenAccent,
                 ),
               ),
             )
-                : const Center(
+                :  Center(
               child: Text(
                 'Email is not verified',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontFamily: 'Roboto-Regular',
                   color: Colors.red,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: 30.h,
             ),
             _isSendingVerification
                 ? const Center(child: CircularProgressIndicator())
@@ -129,20 +130,19 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                         _isSendingVerification = false;
                       });
                     },
-                    child: const Text(
+                    child:  Text(
                       'Verify',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontFamily: 'Roboto-Regular',
                         fontWeight: FontWeight.w400,
-                        height: 0,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 30,
+                 SizedBox(
+                  width: 30.w,
                 ),
                 TextButton.icon(
                   // <-- TextButton
@@ -161,15 +161,15 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                       }
                     } catch (e) {}
                   },
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.refresh,
-                    size: 24,
+                    size: 24.r,
                     color: Color(0xFF1F41BB),
                   ),
-                  label: const Text(
+                  label:  Text(
                     'Check',
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontFamily: 'Roboto-Regular',
                       // color: AppConstant.appTextColor,
                     ),
@@ -177,7 +177,7 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 36),
+             SizedBox(height: 36.h),
             _isSigningOut
                 ? const Center(child: CircularProgressIndicator())
                 : Center(
@@ -196,14 +196,13 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                         transition: Transition.rightToLeftWithFade);
                   });
                 },
-                child: const Text(
+                child:  Text(
                   'Sign out',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
-                    height: 0,
                   ),
                 ),
               ),

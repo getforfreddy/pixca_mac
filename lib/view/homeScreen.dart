@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,6 +31,9 @@ class HomeSample extends StatefulWidget {
 }
 
 class _HomeSampleState extends State<HomeSample> {
+  TextEditingController _searchController = TextEditingController();
+  String _searchText = "";
+
   ImageController caroselController = Get.put(ImageController());
   GoogleController googleController = Get.put(GoogleController());
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -39,6 +41,13 @@ class _HomeSampleState extends State<HomeSample> {
 
   late final User user;
   late List<QueryDocumentSnapshot<Object?>> userData = [];
+
+  void _performSearch() {
+    setState(() {
+      _searchText = _searchController.text;
+    });
+  }
+
 
   @override
   void initState() {
@@ -78,21 +87,21 @@ class _HomeSampleState extends State<HomeSample> {
               child: Text("${userData.isNotEmpty ? userData[0]['username'] : 'N/A'}"),
             ),
             ListTile(
-              leading: Icon(CupertinoIcons.cube_box),
-              title: Text("Order"),
+              leading: const Icon(CupertinoIcons.cube_box),
+              title: const Text("Order"),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OrderScreen(),
+                    builder: (context) => const OrderScreen(),
                   ),
                 );
               },
-              trailing: Icon(Icons.arrow_forward_ios_sharp),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
             ),
             ListTile(
-              leading: Icon(CupertinoIcons.heart),
-              title: Text("Wishlist"),
+              leading: const Icon(CupertinoIcons.heart),
+              title: const Text("Wishlist"),
               onTap: () {
                 Navigator.push(
                   context,
@@ -101,51 +110,51 @@ class _HomeSampleState extends State<HomeSample> {
                   ),
                 );
               },
-              trailing: Icon(Icons.arrow_forward_ios_sharp),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Settings"),
+              leading: const Icon(Icons.settings),
+              title: const Text("Settings"),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SettingsSample(),
+                    builder: (context) => const SettingsSample(),
                   ),
                 );
               },
-              trailing: Icon(Icons.arrow_forward_ios_sharp),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
             ),
             ListTile(
-              leading: Icon(Icons.photo_camera_back),
-              title: Text("Upload phone to database"),
+              leading: const Icon(Icons.photo_camera_back),
+              title: const Text("Upload phone to database"),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Addphonestofirebase(),
+                    builder: (context) => const Addphonestofirebase(),
                   ),
                 );
               },
-              trailing: Icon(Icons.arrow_forward_ios_sharp),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
             ),
             ListTile(
               onTap: () async {
                 await googleController.signOutGoogle();
                 Navigator.pushReplacementNamed(context, '/login');
               },
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout,
                 color: Colors.red,
               ),
-              title: Text(
+              title: const Text(
                 "Logout",
                 style: TextStyle(color: Colors.red),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.photo_camera_back),
-              title: Text("OrderSummery"),
+              leading: const Icon(Icons.photo_camera_back),
+              title: const Text("OrderSummery"),
               onTap: () {
                 // Navigator.push(
                 //   context,
@@ -154,7 +163,7 @@ class _HomeSampleState extends State<HomeSample> {
                 //   ),
                 // );
               },
-              trailing: Icon(Icons.arrow_forward_ios_sharp),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
             ),
           ],
         ),
@@ -162,26 +171,49 @@ class _HomeSampleState extends State<HomeSample> {
       appBar: AppBar(
         title: Text(
           "Pixca",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.r),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 25),
-            child: Icon(CupertinoIcons.search),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
           ),
-          // IconButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => CameraSample(),
-          //       ),
-          //     );
-          //   },
-          //   icon: Icon(CupertinoIcons.camera),
-          // ),
-        ],
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(60.0), // Height of the search bar
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 40.0,
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _searchController,
+
+                        decoration: InputDecoration(
+                          hintText: "Enter search term",
+                          border: InputBorder.none,
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: _performSearch,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

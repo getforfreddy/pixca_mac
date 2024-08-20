@@ -108,7 +108,7 @@ class _PhoneSalesSampleState extends State<PhoneSalesSample> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Sliding Containers",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 30.r),
             ),
           ),
           Padding(
@@ -121,7 +121,7 @@ class _PhoneSalesSampleState extends State<PhoneSalesSample> {
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   return Container(
-                    width: 200,
+                    width: 200.w,
                     margin: EdgeInsets.all(2),
                     color: Colors.green[100],
                     child: Text("image$index"),
@@ -134,20 +134,20 @@ class _PhoneSalesSampleState extends State<PhoneSalesSample> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Tail",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 30.r),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Container(
-              width: 400,
-              height: 200,
+              width: 400.w,
+              height: 200.h,
               color: Colors.grey[300],
               child: Center(
                   child: Text(
                 "End",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.r,
                 ),
               )),
             ),

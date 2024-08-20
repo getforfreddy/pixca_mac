@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../controller/RazorPayCredentials.dart';
@@ -106,28 +107,6 @@ class _RazorPayPageState extends State<RazorPayPage> {
     }
   }
 
-  // Future<void> _updateOrderStatus() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   if (user != null) {
-  //     try {
-  //       QuerySnapshot orderSnapshot = await FirebaseFirestore.instance
-  //           .collection('orders')
-  //           .where('userId', isEqualTo: user.uid)
-  //           .get();
-  //
-  //       for (var orderDoc in orderSnapshot.docs) {
-  //         await orderDoc.reference.update({'orderStatus': 'Success'});
-  //       }
-  //     } catch (e) {
-  //       print('Error updating order status: $e');
-  //       Fluttertoast.showToast(
-  //           msg: 'Error updating order status',
-  //           toastLength: Toast.LENGTH_SHORT,
-  //           gravity: ToastGravity.BOTTOM);
-  //     }
-  //   }
-  // }
-
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     Fluttertoast.showToast(
         msg: 'Payment Success: ' + response.paymentId!,
@@ -190,7 +169,7 @@ class _RazorPayPageState extends State<RazorPayPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(amtController.text),
-              SizedBox(height: 16),
+              SizedBox(height: 16.h),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
